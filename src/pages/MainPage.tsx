@@ -1,8 +1,10 @@
-import { Button } from "./components/Button";
-import Logo from "./assets/logo-hp.png";
-import "./input.css";
+import { Button } from "../components/Button";
+import { useNavigate } from "react-router-dom";
+import Logo from "../assets/logo-hp.png";
 
-function App() {
+export const MainPage = () => {
+  const navigate = useNavigate();
+
   return (
     <div className="w-full h-screen bg-center bg-cover bg-mainBackground">
       <div className="flex items-center w-full h-14 bg-black gap-4">
@@ -22,16 +24,20 @@ function App() {
         <Button
           className="bg-white w-1/3 border-2 text-3xl opacity-80 font-bold border-black rounded-xl p-14 mr-32 mt-60 hover:bg-black hover:border-white hover:text-white hover:transition duration-200"
           type="button"
+          onClick={() => {
+            navigate("/characters");
+          }}
           name="Confira os Personagens"
         />
         <Button
           className="bg-white w-1/3 border-2 text-3xl opacity-80 font-bold border-black rounded-xl p-14 mr-32 hover:bg-black hover:border-white hover:text-white hover:transition duration-200"
           type="button"
+          onClick={() => {
+            navigate("/spells");
+          }}
           name="Confira os Feitiços"
         />
       </div>
     </div>
   );
-}
-
-export default App;
+};
