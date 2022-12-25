@@ -12,12 +12,18 @@ export const MainPage = () => {
         <Button
           className="bg-black text-white h-14 p-4 hover:bg-white hover:text-black hover:transition duration-200"
           name="Personagens"
+          onClick={() => {
+            navigate("/characters");
+          }}
           type="button"
         />
         <Button
           className="text-white h-14 p-4 hover:bg-white hover:text-black hover:transition duration-200"
           name="Feitiços"
           type="button"
+          onClick={() => {
+            navigate("/spells");
+          }}
         />
       </div>
       <div className="flex flex-col items-end gap-36">
