@@ -2,9 +2,15 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
+
+import { FaHatWizard, FaBirthdayCake } from "react-icons/fa";
+import { MdOutlineDetails } from "react-icons/md";
+import { GiHumanPyramid } from "react-icons/gi";
+import { Characters, CharactersHouse } from "../interfaces/characters";
 import { Button } from "../components/Button";
 
 import Logo from "../assets/logo-hp.png";
+import Dobby from "../assets/dobby.webp";
 import GrifinoriaLogo from "../assets/gryffindor-logo.png";
 import SonserinaLogo from "../assets/slytherin-logo.png";
 import LufaLufaLogo from "../assets/hufflepuff-logo.png";
@@ -12,12 +18,10 @@ import CorvinalLogo from "../assets/ravenclaw-logo.png";
 
 export const CharactersPage = () => {
   const navigate = useNavigate();
-  const [nameHouse, setNameHouse] = useState<
-    "Gryffindor" | "Slytherin" | "Hufflepuff" | "Ravenclaw"
-  >();
-  const nameHouseSave = (
-    saveNameHouse: "Gryffindor" | "Slytherin" | "Hufflepuff" | "Ravenclaw"
-  ) => {
+  const [nameHouse, setNameHouse] = useState<CharactersHouse>();
+  const [charactersList, setCharactersList] = useState<Characters[]>();
+
+  const nameHouseSave = (saveNameHouse: CharactersHouse) => {
     setNameHouse(saveNameHouse);
   };
 
@@ -25,7 +29,7 @@ export const CharactersPage = () => {
     axios
       .get(`https://hp-api.onrender.com/api/characters/house/${nameHouse}`)
       .then(function (response) {
-        console.log(response);
+        setCharactersList(response.data);
       })
       .catch(function () {
         toast.error("Algo deu errado");
@@ -39,7 +43,7 @@ export const CharactersPage = () => {
   }, [nameHouse]);
 
   return (
-    <div className="w-full h-screen bg-center bg-cover bg-charactersBackground">
+    <div className="w-full  min-h-screen bg-fixed h-full bg-center bg-cover bg-charactersBackground">
       <div className="flex items-center justify-between w-full h-14 bg-black gap-4">
         <img
           className="ml-4 h-14 cursor-pointer"
@@ -85,6 +89,43 @@ export const CharactersPage = () => {
           Corvinal
           <img className="h-60" src={CorvinalLogo} alt="Logo Corvinal" />
         </Button>
+      </div>
+      <div className="grid grid-cols-4 gap-4 p-6">
+        {charactersList?.map((character) => (
+          <div className="flex items-start justify-center text-white text bg-black bg-opacity-30 p-4 border border-black rounded-md">
+            <div className="flex flex-col gap-2 items-center justify-between">
+              {character.image !== "" ? (
+                <img className="rounded-lg h-44" src={character.image} />
+              ) : (
+                <img className="rounded-lg h-44" src={Dobby} />
+              )}
+              {character.name}
+              {character.wand.wood !== "" && (
+                <div className="flex gap-2 items-center">
+                  <FaHatWizard /> {character.wand.wood}
+                </div>
+              )}
+              {character.dateOfBirth !== "" && (
+                <div className="flex gap-2 items-center">
+                  <FaBirthdayCake />
+                  <p>{character.dateOfBirth}</p>
+                </div>
+              )}
+              {character.ancestry !== "" && (
+                <div className="flex gap-2 items-center">
+                  <GiHumanPyramid />
+                  <p>{character.ancestry}</p>
+                </div>
+              )}
+
+              <Button
+                className="flex items-center justify-center gap-2 bg-black rounded-md text-white p-3 border border-white hover:bg-white hover:border-black hover:text-black hover:transition duration-200"
+                icon={<MdOutlineDetails size={20} />}
+                name="Mais detalhes"
+              />
+            </div>
+          </div>
+        ))}
       </div>
     </div>
   );

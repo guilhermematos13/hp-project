@@ -4,6 +4,7 @@ interface ButtonProps extends React.HTMLProps<HTMLButtonElement> {
   type?: "button" | "submit" | "reset" | undefined;
   className?: string;
   children?: ReactNode;
+  icon?: ReactNode;
 }
 
 export const Button = ({
@@ -12,10 +13,11 @@ export const Button = ({
   onClick,
   className,
   children,
+  icon,
 }: ButtonProps) => {
   return (
     <button type={type} className={`${className}`} onClick={onClick}>
-      {!children && name} {children && children}
+      {icon && icon} {!children && name} {children && children}
     </button>
   );
 };
