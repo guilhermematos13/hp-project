@@ -1,4 +1,5 @@
 import Logo from "../assets/logo-hp.png";
+import { useNavigate } from "react-router-dom";
 import { Button } from "../components/Button";
 
 import GrifinoriaLogo from "../assets/gryffindor-logo.png";
@@ -7,10 +8,19 @@ import LufaLufaLogo from "../assets/hufflepuff-logo.png";
 import CorvinalLogo from "../assets/ravenclaw-logo.png";
 
 export const CharactersPage = () => {
+  const navigate = useNavigate();
+
   return (
     <div className="w-full h-screen bg-center bg-cover bg-charactersBackground">
       <div className="flex items-center justify-between w-full h-14 bg-black gap-4">
-        <img className="ml-4 h-14" src={Logo} alt="Logo Harry Potter" />
+        <img
+          className="ml-4 h-14 cursor-pointer"
+          src={Logo}
+          alt="Logo Harry Potter"
+          onClick={() => {
+            navigate("/");
+          }}
+        />
         <div>
           <label className="text-white font-bold text-2xl">
             Salão Principal
@@ -19,19 +29,19 @@ export const CharactersPage = () => {
         <div></div>
       </div>
       <div className="flex w-full items-center justify-between p-6 gap-4">
-        <Button className="flex flex-col items-center gap-4 bg-red-500 font-bold w-1/4 p-4 rounded-lg text-white">
+        <Button className="flex flex-col items-center gap-4 bg-red-500 opacity-80 font-bold w-1/4 p-4 rounded-lg text-white hover:opacity-100">
           Grifinória
           <img className="h-60" src={GrifinoriaLogo} alt="Logo Grifinória" />
         </Button>
-        <Button className="flex flex-col items-center gap-4 bg-green-800 font-bold w-1/4 p-4 rounded-lg text-white">
+        <Button className="flex flex-col items-center gap-4 bg-green-800 opacity-80 font-bold w-1/4 p-4 rounded-lg text-white hover:opacity-100">
           Sonserina
           <img className="h-60" src={SonserinaLogo} alt="Logo Sonserina" />
         </Button>
-        <Button className="flex flex-col items-center gap-4 bg-purple-800 font-bold w-1/4 p-4 rounded-lg text-white">
+        <Button className="flex flex-col items-center gap-4 bg-purple-800 opacity-80 font-bold w-1/4 p-4 rounded-lg text-white hover:opacity-100">
           Lufa-Lufa
           <img className="h-60" src={LufaLufaLogo} alt="Logo Lufa-Lufa" />
         </Button>
-        <Button className="flex flex-col items-center gap-4 bg-blue-900  font-bold w-1/4 p-4 rounded-lg text-white">
+        <Button className="flex flex-col items-center gap-4 bg-blue-900 opacity-80 font-bold w-1/4 p-4 rounded-lg text-white hover:opacity-100">
           Corvinal
           <img className="h-60" src={CorvinalLogo} alt="Logo Corvinal" />
         </Button>
