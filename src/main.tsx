@@ -1,5 +1,6 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import ReactDOM from "react-dom/client";
+import { Toaster } from "react-hot-toast";
 import { MainPage } from "./pages/MainPage";
 import "./input.css";
 import { CharactersPage } from "./pages/CharactersPage";
@@ -23,5 +24,6 @@ const router = createBrowserRouter([
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <>
     <RouterProvider router={router} />
+    <Toaster position="top-right" />
   </>
 );
