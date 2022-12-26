@@ -4,7 +4,8 @@ module.exports = {
   theme: {
     extend: {
       backgroundImage: (theme) => ({
-        mainBackground: "url('/src/assets/main-castle.jpeg')"
+        mainBackground: "url('/src/assets/main-castle.jpeg')",
+        charactersBackground: "url('/src/assets/grand-hall.png')"
       }),
 
       fontFamily:{
