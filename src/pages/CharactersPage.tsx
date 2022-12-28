@@ -15,11 +15,25 @@ import GrifinoriaLogo from "../assets/gryffindor-logo.png";
 import SonserinaLogo from "../assets/slytherin-logo.png";
 import LufaLufaLogo from "../assets/hufflepuff-logo.png";
 import CorvinalLogo from "../assets/ravenclaw-logo.png";
+import { Modal } from "../components/Modal";
 
 export const CharactersPage = () => {
   const navigate = useNavigate();
   const [nameHouse, setNameHouse] = useState<CharactersHouse>();
   const [charactersList, setCharactersList] = useState<Characters[]>();
+  const [openModal, setOpenModal] = useState(false);
+  const [character, setCharacter] = useState<Characters>();
+
+  function handleOpenModal(characterItem: Characters) {
+    if (characterItem) {
+      setCharacter(characterItem);
+    }
+    setOpenModal(true);
+  }
+
+  function handleCloseModal() {
+    setOpenModal(false);
+  }
 
   const nameHouseSave = (saveNameHouse: CharactersHouse) => {
     setNameHouse(saveNameHouse);
@@ -43,7 +57,34 @@ export const CharactersPage = () => {
   }, [nameHouse]);
 
   return (
-    <div className="w-full  min-h-screen bg-fixed h-full bg-center bg-cover bg-charactersBackground">
+    <div className="w-full min-h-screen bg-fixed h-full bg-center bg-cover bg-charactersBackground">
+      <Modal openModal={openModal} handleCloseModal={handleCloseModal}>
+        <div className="flex w-full justify-center">
+          {character?.image ? (
+            <img
+              className="rounded-lg mt-2 w-52"
+              src={character?.image}
+              alt="Foto do Bruxo"
+            />
+          ) : (
+            <img
+              className="rounded-lg mt-2 w-52"
+              src={Dobby}
+              alt="Foto do Bruxo"
+            />
+          )}
+        </div>
+        <div className="flex flex-col gap-2 items-center font-bold mt-4">
+          <p>{character?.name}</p>
+          {character?.alive === true ? "Esta vivo" : "Morreu"}
+          <p>Cor do olhos: {character?.eyeColour}</p>
+          <p>Cor do cabelo: {character?.hairColour}</p>
+          <p>Casa: {character?.house}</p>
+          {character?.hogwartsStudent === true
+            ? "Estuda em Hogwarts"
+            : "Nao estuda em Hogwarts"}
+        </div>
+      </Modal>
       <div className="flex items-center justify-between w-full h-14 bg-black gap-4">
         <img
           className="ml-4 h-14 cursor-pointer"
@@ -77,7 +118,7 @@ export const CharactersPage = () => {
         </Button>
         <Button
           onClick={() => nameHouseSave("Hufflepuff")}
-          className="flex flex-col items-center gap-4 bg-purple-800 opacity-80 font-bold w-1/4 p-4 rounded-lg text-white hover:opacity-100"
+          className="flex flex-col items-center gap-4 bg-yellow-700 opacity-80 font-bold w-1/4 p-4 rounded-lg text-white hover:opacity-100"
         >
           Lufa-Lufa
           <img className="h-60" src={LufaLufaLogo} alt="Logo Lufa-Lufa" />
@@ -122,6 +163,7 @@ export const CharactersPage = () => {
                 className="flex items-center justify-center gap-2 bg-black rounded-md text-white p-3 border border-white hover:bg-white hover:border-black hover:text-black hover:transition duration-200"
                 icon={<MdOutlineDetails size={20} />}
                 name="Mais detalhes"
+                onClick={() => handleOpenModal(character)}
               />
             </div>
           </div>
