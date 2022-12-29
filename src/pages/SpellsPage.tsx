@@ -41,7 +41,7 @@ export const SpellsPage = () => {
             Sala de Feitiços
           </label>
         </div>
-        <div></div>
+        <div className="w-14"></div>
       </div>
 
       <div className="flex items-center justify-center">

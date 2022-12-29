@@ -99,7 +99,7 @@ export const CharactersPage = () => {
             Salão Principal
           </label>
         </div>
-        <div></div>
+        <div className="w-14"></div>
       </div>
       <div className="flex w-full items-center justify-between p-6 gap-4">
         <Button
