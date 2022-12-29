@@ -25,3 +25,8 @@ export interface Characters {
         alive: boolean,
         image: string
       }
+
+export interface Spells {
+  name: string,
+  description: string
+}
